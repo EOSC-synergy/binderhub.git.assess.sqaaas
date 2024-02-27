@@ -1,0 +1,76 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: feature/fair-epos-prototype
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/jupyterhub/binderhub:
+      branch: main
+      repo: https://github.com/jupyterhub/binderhub.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/jupyterhub/binderhub git:
+        commands:
+        - /usr/bin/env sh .sqa/script.breezy-cream-robin.sh
+        container: qc.acc_shaggy-white-turkey
+  QC.Doc:
+    repos:
+      github.com/jupyterhub/binderhub find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.goopy-crimson-iguana.sh
+        container: qc.doc_shaky-wisteria-tarantula
+      github.com/jupyterhub/binderhub git:
+        commands:
+        - /usr/bin/env sh .sqa/script.nerdy-cinnabar-caracal.sh
+        container: qc.doc_pretty-cerulean-spitz
+      github.com/jupyterhub/binderhub markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.hazy-cerise-mastiff.sh
+        container: qc.doc_messy-champagne-javanese
+      github.com/jupyterhub/binderhub restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-carmine-owl.sh
+        container: qc.doc_pasty-denim-octopus
+  QC.Lic:
+    repos:
+      github.com/jupyterhub/binderhub licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-violet-bongo.sh
+        container: qc.lic_gummy-ivory-zorse
+  QC.Sec:
+    repos:
+      github.com/jupyterhub/binderhub bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-salmon-tarantula.sh
+        container: qc.sec_beady-malachite-fousek
+  QC.Sty:
+    repos:
+      github.com/jupyterhub/binderhub flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.droopy-auburn-argentino.sh
+        container: qc.sty_cheeky-tangerine-sheep
+      github.com/jupyterhub/binderhub hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.nippy-khaki-wildebeest.sh
+        container: qc.sty_surly-ruby-indri
+      github.com/jupyterhub/binderhub jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.homely-white-lemming.sh
+        container: qc.sty_woolly-grey-quetzal
+  QC.Uni:
+    repos:
+      github.com/jupyterhub/binderhub pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.nerdy-seashell-scorpion.sh
+        container: qc.uni_sleepy-rose-barracuda
+  QC.Ver:
+    repos:
+      github.com/jupyterhub/binderhub get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.crabby-cream-dingo.sh
+        container: qc.ver_blurry-sangria-binturong
+timeout: 5400
